@@ -1,0 +1,70 @@
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<?php 
+	$title = 'Edita los datos de tu mascota';
+	$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+
+<?php
+	echo $this->form()->openTag($form);
+	echo$this->formHidden($form->get('id'));
+?>
+
+<?php
+	echo$this->formRow($form->get('nombre'));
+?>
+<br/>
+<?php
+	echo$this->formRow($form->get('raza'));
+?>
+<br/>
+<?php
+	echo$this->formRow($form->get('sexo'));
+?>
+<br/>
+
+
+<br/>
+<?php
+	echo$this->formRow($form->get('caracteristicas'));
+?>
+<br/>
+<?php
+
+
+	echo$this->formSubmit($form->get('submit') );
+
+	echo $this->form()->closeTag($form);
+?>
+
+
+ <!--<a class="btn btn-primary" href="#"  onclick ="Modificar()" >Guardar Datos</a><-->
+
+<script type="text/javascript">
+	var m = '<?php echo $this->mensaje ?>';
+	if(m != ""){
+		Swal.fire(
+
+  '<?php echo $this->mensaje; ?>',
+  'You clicked the button!',
+  'success'
+
+);
+
+		window.location.href = "http://localhost/Crudcapa3/public/post/index";
+
+	}
+   /*function Modificar(){
+    Swal.fire(
+  'Good job!',
+  'You clicked the button!',
+  'success'
+)
+    location.href=".//"+id;
+     
+   }*/
+ </script>
+

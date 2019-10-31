@@ -1,0 +1,101 @@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+<div class="row">
+    
+
+<a href="<?php  echo $this->basePath('/post/add'); ?>" class="btn btn-info">CREATE</a>
+
+
+</div>
+
+
+<div class='row'>
+ <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Raza</th>
+      <th scope="col">Sexo</th>
+      <th scope="col">Caracteristicas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php if(count($posts)>0):?>
+        <?php foreach ($posts as  $post): ?>
+
+        <tr>
+          <td><?php echo $post['id']; ?></td>
+          <td><?php echo $post['nombre']; ?></td>
+          <td><?php echo $post['raza']; ?></td>
+          <td><?php echo $post['sexo']; ?></td>
+          <td><?php echo $post['caracteristicas']; ?></td>
+
+
+           <td><a class="btn btn-primary" href="<?php echo $this->basePath()."/post/edit/".$post['id'];?>" >Modificar</a></td>
+           
+             
+
+
+ <td><a onclick="Eliminar(<?php echo $post['id']; ?>)" href="#" class="btn btn-danger"> Eliminar </a></td>
+
+
+
+        </tr>
+
+
+
+         <?php endforeach; ?>
+    <?php else: ?>
+        <tr>
+            <td>No records found!</td>
+        </tr>
+
+   <?php endif;?>
+
+
+  </tbody>
+</table>
+ <script type="text/javascript">
+   function Eliminar (id){     
+
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger',
+    timer: Swal.clickConfirm ()
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: '¿Estas seguro de eliminar?',
+  text: "¡No podrás revertir esto!",
+  type: 'warning',
+
+  showCancelButton: true,
+  confirmButtonText: '¡Si, eliminar!',
+  cancelButtonText: '¡No, cancelar!',
+  reverseButtons: true
+}).then((result) => {
+  if (result.value) {
+    swalWithBootstrapButtons.fire(
+      '¡Eliminado!',
+      'Su archivo ha sido eliminado.',
+      'success'
+    )
+       location.href="./delete/"+id;
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'Cancelado',
+      'Tu archivo imaginario está seguro :)',
+      'error'
+    )
+  }
+})
+}
+
+ </script>
